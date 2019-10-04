@@ -6,6 +6,7 @@ Created on Thu Oct  3 14:15:31 2019
 University of Wisconsin-Madison
 """
 def parameter_x(Q,name):
+    import math
     pi = 3.1415926
     dic = {
 "H"	:	[	0.489918	,	20.6593	,	0.262003	,	7.74039	,	0.196767	,	49.5519	,	0.049879	,	2.20159	,	0.001305	],
@@ -124,6 +125,7 @@ def parameter_x(Q,name):
     i = 0
     
     while i <= last:
+        j = i
         #if name[i] not in num_dic and name[i] not in dic:
         #    return []
         if (i+1) <= last and (name[i:i+2]) in dic:
@@ -142,8 +144,13 @@ def parameter_x(Q,name):
                 i += 1
                 if i > last:
                     break
+        if j == i :
+            print("Wrong Formula Input")
+            break
+            #return []
         else:
             ele_weight = 1
+        
         element_ratio.append(ele_weight)
     #return (parameter_matrix,element_ratio)
     N_ele = len(element_ratio)
@@ -170,9 +177,10 @@ def parameter_x(Q,name):
 
 # input the chemical  
 #example
-chemical = "C55H72O5N4Mg"       
+chemical = "C55H72O5N4Mg"    
 Q = [i/100 for i in range(1000)]
 factor =(parameter_x(Q,chemical)) 
+
 
 import matplotlib.pyplot as plt
 plt.plot(Q,factor[0],label = 'f') 
