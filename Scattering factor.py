@@ -2,25 +2,11 @@
 """
 Created on Thu Oct  3 14:15:31 2019
 
-@author: yluea
+@author: Lorenzo-Lu 
+University of Wisconsin-Madison
 """
-
-def term_cal(parameter,Q):
-    pi = 3.1415926
-    if len(parameter) != 9:
-        return "FALSE"
-    X = pow((Q / 4 /pi),2)
-    
-    S1 = math.exp(-parameter[1] * X)
-    S2 = math.exp(-parameter[3] * X)
-    S3 = math.exp(-parameter[5] * X)
-    S4 = math.exp(-parameter[7] * X)
-    
-    f = parameter[0] * S1 + parameter[2] * S2 + parameter[4] * S3 + parameter[6] * S4 + parameter[8]
-    f2 = pow(f,2)
-    
-    return [f,f2]
 def parameter_x(Q,name):
+    pi = 3.1415926
     dic = {
 "H"	:	[	0.489918	,	20.6593	,	0.262003	,	7.74039	,	0.196767	,	49.5519	,	0.049879	,	2.20159	,	0.001305	],
 "He"	:	[	0.8734	,	9.1037	,	0.6309	,	3.3568	,	0.3112	,	22.9276	,	0.178	,	0.9821	,	0.0064	],
@@ -170,9 +156,15 @@ def parameter_x(Q,name):
     f2 = [0] * L_Q
     for qi in range(L_Q):
         for ei in range(N_ele):
-            atomic_factor = term_cal(parameter_matrix[ei],Q[qi])
-            f[qi] += atomic_factor[0] * element_ratio[ei]
-            f2[qi] += atomic_factor[1] * element_ratio[ei]
+            X = pow((Q[qi] / 4 /pi),2)    
+            S1 = math.exp(-parameter_matrix[ei][1] * X)
+            S2 = math.exp(-parameter_matrix[ei][3] * X)
+            S3 = math.exp(-parameter_matrix[ei][5] * X)
+            S4 = math.exp(-parameter_matrix[ei][7] * X)
+            cal_f = parameter_matrix[ei][0] * S1 + parameter_matrix[ei][2] * S2 + parameter_matrix[ei][4] * S3 + parameter_matrix[ei][6] * S4 + parameter_matrix[ei][8]            
+            
+            f[qi] += cal_f * element_ratio[ei]
+            f2[qi] += pow(cal_f,2) * element_ratio[ei]
     return [f,f2]
    
 
