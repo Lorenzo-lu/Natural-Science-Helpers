@@ -124,8 +124,8 @@ def parameter_x(Q,name):
     i = 0
     
     while i <= last:
-        if name[i] not in num_dic and name[i] not in dic:
-            return "FALSE"
+        #if name[i] not in num_dic and name[i] not in dic:
+        #    return []
         if (i+1) <= last and (name[i:i+2]) in dic:
             parameter_matrix.append(dic[name[i:i+2]])
             i += 2
@@ -170,7 +170,7 @@ def parameter_x(Q,name):
 
 # input the chemical  
 #example
-chemical = "H2O"       
+chemical = "C55H72O5N4Mg"       
 Q = [i/100 for i in range(1000)]
 factor =(parameter_x(Q,chemical)) 
 
