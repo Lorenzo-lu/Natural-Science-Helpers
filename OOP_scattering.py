@@ -128,6 +128,10 @@ class chemical:
                 parameter_matrix.append(dic[name[i]]);
                 i += 1;
                 
+            if j == i :
+                #("Wrong Formula Input")
+                return False;
+                
             ele_weight = 0
             if i <= last and name[i] in num_dic:
                 ele_weight = num_dic[name[i]];
@@ -136,15 +140,14 @@ class chemical:
                     ele_weight = ele_weight * 10 + num_dic[name[i]];
                     i += 1;
                     if i > last:
-                        break;
-            if j == i :
-                #("Wrong Formula Input")
-                return False;
+                        break;           
             else:
                 ele_weight = 1;                
             element_ratio.append(ele_weight);
             
+            
         N_ele = len(element_ratio);
+        
         ele_total = sum(element_ratio);
         for i in range(N_ele):
             element_ratio[i] = element_ratio[i] / ele_total;
@@ -192,6 +195,7 @@ class form_factor:
         
      
 name = "C55H72O5N4Mg"; 
+#name = 'H2O';
 #name = 'H2S';
 Q = [i/100 for i in range(1000)];
 sample = form_factor(name,Q);  
