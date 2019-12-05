@@ -135,6 +135,10 @@ def parameter_x(Q,name):
             parameter_matrix.append(dic[name[i]])
             i +=1
             
+        if j == i :
+            print("Wrong Formula Input")
+            break
+            
         ele_weight = 0
         if i <= last and name[i] in num_dic:
             ele_weight = num_dic[name[i]]
@@ -144,9 +148,7 @@ def parameter_x(Q,name):
                 i += 1
                 if i > last:
                     break
-        if j == i :
-            print("Wrong Formula Input")
-            break
+        
             #return []
         else:
             ele_weight = 1
@@ -157,6 +159,7 @@ def parameter_x(Q,name):
     ele_total = sum(element_ratio)
     for i in range(N_ele):
         element_ratio[i] = element_ratio[i] / ele_total
+    
     
     L_Q = len(Q)
     f = [0] * L_Q
@@ -177,16 +180,17 @@ def parameter_x(Q,name):
 
 # input the chemical  
 #example
-chemical = "C55H72O5N4Mg"    
+name = "C55H72O5N4Mg";    
+#name = 'H2O';
 Q = [i/100 for i in range(1000)]
-factor =(parameter_x(Q,chemical)) 
+factor =(parameter_x(Q,name)) 
 
 
 import matplotlib.pyplot as plt
 plt.plot(Q,factor[0],label = 'f') 
 plt.plot(Q,factor[1],label = 'f^2')  
 plt.legend()
-plt.title("Structure factor of %s under X-ray"%(chemical))
+plt.title("Form factor of %s under X-ray"%(name))
 plt.xlabel("Q/(1/A)")
 plt.ylabel("cts")
 plt.show()
